@@ -16,6 +16,11 @@ public class Reigns {
     private static Personnage personnage;
 
     /**
+     * afficher la jauge
+     */
+    private static AfficherJauge AfficherJauge;
+
+    /**
      * la banque de questions
      */
     private static ArrayList<Question> questions;
@@ -38,18 +43,20 @@ public class Reigns {
 
         initPersonnage();
 
+        AfficherJauge = new AfficherJauge();
+        
         System.out.println(personnage.getGenre().longRegne()
                 +" "+personnage.getNom());
 
-        personnage.AfficheJauges();
+        AfficherJauge.AfficheJauges();
 
         // tirage des questions
         int nbTours = 0;
-        while(!personnage.finDuJeu()){
+        while(!AfficherJauge.finDuJeu()){
             nbTours++;
             Question question = getQuestionAleatoire();
             reponseQuestion(question);
-            personnage.AfficheJauges();
+            AfficherJauge.AfficheJauges();
         }
 
         // fin du jeu
@@ -79,9 +86,9 @@ public class Reigns {
         }
         // applique les malus
         if(reponse.equals("G")){
-            question.appliqueEffetsGauche(personnage);
+            question.appliqueEffetsGauche(AfficherJauge);
         }else{
-            question.appliqueEffetsDroite(personnage);
+            question.appliqueEffetsDroite(AfficherJauge);
         }
     }
 

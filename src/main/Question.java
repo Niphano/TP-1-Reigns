@@ -91,49 +91,49 @@ public class Question {
     /**
      * Applique les effets associés au choix gauche sur un personnage donné.
      *
-     * @param personnage le personnage sur lequel les effets doivent être appliqués
+     * @param AfficherJauge le personnage sur lequel les effets doivent être appliqués
      */
-    public void appliqueEffetsGauche(Personnage personnage){
-        this.appliqueEffets(effetJaugeGauche, personnage);
+    public void appliqueEffetsGauche(AfficherJauge AfficherJauge){
+        this.appliqueEffets(effetJaugeGauche, AfficherJauge);
     }
 
     /**
      * Applique les effets associés au choix droit sur un personnage donné.
      *
-     * @param personnage le personnage sur lequel les effets doivent être appliqués
+     * @param AfficherJauge le personnage sur lequel les effets doivent être appliqués
      */
-    public void appliqueEffetsDroite(Personnage personnage){
-        this.appliqueEffets(effetJaugeDroite, personnage);
+    public void appliqueEffetsDroite(AfficherJauge AfficherJauge){
+        this.appliqueEffets(effetJaugeDroite, AfficherJauge);
     }
 
     /**
      * Applique les effets d'une jauge sur un personnage donné.
      *
      * @param effets les effets de jauge à appliquer
-     * @param personnage le personnage sur lequel les effets doivent être appliqués
+     * @param AfficherJauge le personnage sur lequel les effets doivent être appliqués
      */
     private void appliqueEffets(Map<TypeJauge,Integer> effets,
-                                Personnage personnage){
+                                AfficherJauge AfficherJauge){
         for(Map.Entry<TypeJauge,Integer> effet : effets.entrySet()){
             switch(effet.getKey()){
                 case ARMEE:
-                    personnage.getJaugeArmee().setValeur(
-                            personnage.getJaugeArmee().getValeur()
+                    AfficherJauge.getJaugeArmee().setValeur(
+                            AfficherJauge.getJaugeArmee().getValeur()
                                     +effet.getValue());
                     break;
                 case CLERGE:
-                    personnage.getJaugeClerge().setValeur(
-                            personnage.getJaugeClerge().getValeur()
+                    AfficherJauge.getJaugeClerge().setValeur(
+                            AfficherJauge.getJaugeClerge().getValeur()
                                     +effet.getValue());
                     break;
                 case FINANCE:
-                    personnage.getJaugeFinance().setValeur(
-                            personnage.getJaugeFinance().getValeur()
+                    AfficherJauge.getJaugeFinance().setValeur(
+                            AfficherJauge.getJaugeFinance().getValeur()
                                     +effet.getValue());
                     break;
                 case PEUPLE:
-                    personnage.getJaugePeuple().setValeur(
-                            personnage.getJaugePeuple().getValeur()
+                    AfficherJauge.getJaugePeuple().setValeur(
+                            AfficherJauge.getJaugePeuple().getValeur()
                                     +effet.getValue());
                     break;
             }

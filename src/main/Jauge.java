@@ -20,6 +20,7 @@ public class Jauge {
      */
     protected int valeur;
 
+
     /**
      * Crée une nouvelle jauge avec le nom et la valeur spécifiés.
      *
