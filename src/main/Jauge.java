@@ -41,15 +41,6 @@ public class Jauge {
     }
 
     /**
-     * Modifie le nom de la jauge.
-     *
-     * @param nom Le nouveau nom de la jauge
-     */
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    /**
      * Retourne la valeur de la jauge.
      *
      * @return la valeur de la jauge
@@ -65,23 +56,5 @@ public class Jauge {
      */
     public void setValeur(int valeur) {
         this.valeur = valeur;
-    }
-
-    /**
-     * Retourne le type de la jauge.
-     *
-     * @return le type de la jauge
-     */
-    public TypeJauge getType() {
-        return type;
-    }
-
-    /**
-     * Modifie le type de la jauge.
-     *
-     * @param type Le nouveau type de la jauge
-     */
-    public void setType(TypeJauge type) {
-        this.type = type;
     }
 }
