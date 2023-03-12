@@ -62,7 +62,7 @@ public class Gauge {
         for (int i = 0; i < this.value; i++) {
             sb.append("|");
         }
-        for (int i = 0; i < GAUGE_LENGTH - this.value; i++) {
+        for (int i = 0; i < Constants.GAUGE_LENGTH - this.value; i++) {
             sb.append(" ");
         }
         sb.append("] ");

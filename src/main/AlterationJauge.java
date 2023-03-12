@@ -7,8 +7,16 @@ public class AlterationJauge extends AbstractEffect {
 
     static Character PERSO_CIBLE;
 
+    public AlterationJauge(TypeJauge jaugeCible, int valeur) {
+        this.jaugesCibles = Map.of(jaugeCible, valeur);
+    }
+
     public AlterationJauge(Map<TypeJauge, Integer> jaugesCibles) {
         this.jaugesCibles = jaugesCibles;
+    }
+
+    public static AlterationJauge of(TypeJauge jaugeCible, int valeur) {
+        return new AlterationJauge(jaugeCible, valeur);
     }
 
     @Override
@@ -18,15 +26,17 @@ public class AlterationJauge extends AbstractEffect {
             int valeur = paire.getValue();
             PERSO_CIBLE.getGaugeByType(type).incrementerValeur(valeur);
         }
-        //super.PERSO_CIBLE.;
     }
 
     @Override
     String traffickerEffect() {
-        String res = "";
+        StringBuilder sb = new StringBuilder();
         for(Map.Entry<TypeJauge,Integer> paire : jaugesCibles.entrySet()){
-            res += GaugesBank.getNomTypeJauge().get(paire.getKey()) + " : " + paire.getValue().toString() + " ; ";
+            sb.append(GaugesBank.getNomTypeJauge().get(paire.getKey()))
+                    .append(" : ")
+                    .append(paire.getValue().toString())
+                    .append(" ; ");
         }
-        return res;
+        return sb.toString();
     }
 }

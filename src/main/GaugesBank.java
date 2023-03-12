@@ -5,7 +5,6 @@ import java.util.TreeMap;
 
 public class GaugesBank {
     private Map<TypeJauge, Gauge> liste;
-    private static final int GAUGE_LENGTH = 50;
 
     static private final Map<TypeJauge,String> types = Map.of(
             TypeJauge.ARMEE,"Armee",
@@ -23,7 +22,7 @@ public class GaugesBank {
         for(Map.Entry<TypeJauge,String> paire : types.entrySet()){
             TypeJauge type = paire.getKey();
             String nom = paire.getValue();
-            this.liste.put(type,new Gauge(nom,Gauge.valInitJauge(15,35),GAUGE_LENGTH, type));
+            this.liste.put(type,new Gauge(nom,Gauge.valInitJauge(15,35),Constants.GAUGE_LENGTH, type));
         }
     }
 
