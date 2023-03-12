@@ -2,21 +2,21 @@ package main;
 
 import java.util.Map;
 
-public class AlterationJauge extends AbstractEffect {
+public class GaugeChanges extends AbstractEffect {
     private Map<TypeJauge,Integer> jaugesCibles;
 
     static Character PERSO_CIBLE;
 
-    public AlterationJauge(TypeJauge jaugeCible, int valeur) {
+    public GaugeChanges(TypeJauge jaugeCible, int valeur) {
         this.jaugesCibles = Map.of(jaugeCible, valeur);
     }
 
-    public AlterationJauge(Map<TypeJauge, Integer> jaugesCibles) {
+    public GaugeChanges(Map<TypeJauge, Integer> jaugesCibles) {
         this.jaugesCibles = jaugesCibles;
     }
 
-    public static AlterationJauge of(TypeJauge jaugeCible, int valeur) {
-        return new AlterationJauge(jaugeCible, valeur);
+    public static GaugeChanges of(TypeJauge jaugeCible, int valeur) {
+        return new GaugeChanges(jaugeCible, valeur);
     }
 
     @Override

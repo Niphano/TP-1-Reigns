@@ -23,28 +23,28 @@ public class Question {
     /**
      * les effets sur les jauges pour la réponse de gauche
      */
-    protected Effet effetGauche;
+    protected Effect effectGauche;
     /**
      * les effets sur les jauges pour la réponse de droite
      */
-    protected Effet effetDroite;
+    protected Effect effectDroite;
 
     /**
      * Construit une nouvelle question avec les informations données
      *
      * @param nomPersonnage Le nom du personnage associé à la question
      * @param question La question à poser
-     * @param effetGauche L'effet de la réponse de gauche
-     * @param effetDroite L'effet de la réponse de droite
+     * @param effectGauche L'effet de la réponse de gauche
+     * @param effectDroite L'effet de la réponse de droite
      */
     public Question(String nomPersonnage,
                     String question,
-                    Effet effetGauche,
-                    Effet effetDroite) {
+                    Effect effectGauche,
+                    Effect effectDroite) {
         this.nomPersonnage = nomPersonnage;
         this.question = question;
-        this.effetGauche = effetGauche;
-        this.effetDroite = effetDroite;
+        this.effectGauche = effectGauche;
+        this.effectDroite = effectDroite;
     }
 
     /**
@@ -53,14 +53,14 @@ public class Question {
     public void afficheQuestion() {
         String result = "["+nomPersonnage+"] "
                 + question
-                + "[" + effetGauche.getAlias() + " : "+effetGauche.getNom()
-                + "," + effetDroite.getAlias() + " : "+effetDroite.getNom()
+                + "[" + effectGauche.getAlias() + " : "+ effectGauche.getNom()
+                + "," + effectDroite.getAlias() + " : "+ effectDroite.getNom()
                 + "]";
         System.out.println(result);
-        System.out.println("Effet "+ effetGauche.getAlias() +" : ");
-        effetGauche.afficher();
-        System.out.println("Effet " + effetDroite.getAlias() +" : ");
-        effetDroite.afficher();
+        System.out.println("Effet "+ effectGauche.getAlias() +" : ");
+        effectGauche.afficher();
+        System.out.println("Effet " + effectDroite.getAlias() +" : ");
+        effectDroite.afficher();
         System.out.flush();
     }
 
@@ -89,7 +89,7 @@ public class Question {
      * @param personnage le personnage sur lequel les effets doivent être appliqués
      */
     public void appliqueEffetsGauche(Character personnage){
-        this.effetGauche.appliquer();
+        this.effectGauche.appliquer();
     }
 
     /**
@@ -98,7 +98,7 @@ public class Question {
      * @param personnage le personnage sur lequel les effets doivent être appliqués
      */
     public void appliqueEffetsDroite(Character personnage){
-        this.effetDroite.appliquer();
+        this.effectDroite.appliquer();
     }
 
     /**
@@ -183,17 +183,17 @@ public class Question {
      *
      * @return l'effet gauche de la question.
      */
-    public Effet getEffetGauche() {
-        return effetGauche;
+    public Effect getEffetGauche() {
+        return effectGauche;
     }
 
     /**
      * Modifie l'effet gauche de la question.
      *
-     * @param effetGauche le nouvel effet gauche de la question
+     * @param effectGauche le nouvel effet gauche de la question
      */
-    public void setEffetGauche(Effet effetGauche) {
-        this.effetGauche = effetGauche;
+    public void setEffetGauche(Effect effectGauche) {
+        this.effectGauche = effectGauche;
     }
 
     /**
@@ -201,17 +201,17 @@ public class Question {
      *
      * @return l'effet droit de la question.
      */
-    public Effet getEffetDroite() {
-        return effetDroite;
+    public Effect getEffetDroite() {
+        return effectDroite;
     }
 
     /**
      * Modifie l'effet droit de la question.
      *
-     * @param effetDroite le nouvel effet droit de la question
+     * @param effectDroite le nouvel effet droit de la question
      */
-    public void setEffetDroite(Effet effetDroite) {
-        this.effetDroite = effetDroite;
+    public void setEffetDroite(Effect effectDroite) {
+        this.effectDroite = effectDroite;
     }
 
 }

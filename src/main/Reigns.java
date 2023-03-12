@@ -20,7 +20,7 @@ public class Reigns {
     /**
      * la banque de questions
      */
-    private static BDD questions;
+    private static Database questions;
 
     /**
      * La méthode main lance le jeu Reigns. Il initialise les questions, le personnage,
@@ -46,13 +46,13 @@ public class Reigns {
     private static void initialiser_partie(){
         System.out.println("Bienvenue sur Reigns");
 
-        questions = new BDD();
+        questions = new Database();
 
         System.out.println("Création du personnage...");
 
         Reigns.personnage = new Character();
 
-        AlterationJauge.PERSO_CIBLE = Reigns.personnage;
+        GaugeChanges.PERSO_CIBLE = Reigns.personnage;
 
         System.out.println(personnage.getGenre().longRegne()
                 +" "+personnage.getName());
@@ -66,8 +66,8 @@ public class Reigns {
 
             Question question = questions.getQuestionAleatoire();
             reponseQuestion(question);
-            personnage.showGauges();
             nbTours = nbTours + 1;
+            personnage.showGauges();
         }
     }
 

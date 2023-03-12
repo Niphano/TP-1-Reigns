@@ -1,12 +1,12 @@
 package main;
 
-public class Effet {
+public class Effect {
     private String nom;
     private String alias;
     private String desription;
     private AbstractEffect action;
 
-    public Effet(String nom, String alias, AbstractEffect strategie) {
+    public Effect(String nom, String alias, AbstractEffect strategie) {
         this.nom = nom;
         this.alias = alias;
         this.action = strategie;
