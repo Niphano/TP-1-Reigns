@@ -1,0 +1,49 @@
+package main;
+
+import java.util.Map;
+import java.util.TreeMap;
+
+public class listGauges {
+    private Map<TypeJauge, Gauge> liste;
+    private static final int GAUGE_LENGTH = 50;
+
+    static private final Map<TypeJauge,String> types = Map.of(
+            TypeJauge.ARMEE,"Armee",
+            TypeJauge.CLERGE,"Clerge",
+            TypeJauge.FINANCE,"Finance",
+            TypeJauge.PEUPLE,"Peuple"
+    );
+
+    public static Map<TypeJauge,String> getNomTypeJauge(){
+        return types;
+    }
+
+    public listGauges(){
+        this.liste = new TreeMap<TypeJauge, Gauge>();
+        for(Map.Entry<TypeJauge,String> paire : types.entrySet()){
+            TypeJauge type = paire.getKey();
+            String nom = paire.getValue();
+            this.liste.put(type,new Gauge(nom,Gauge.valInitJauge(15,35),Gauge., type));
+        }
+    }
+
+    public Gauge getJaugeSelonType(TypeJauge typeCible){
+        return this.liste.get(typeCible);
+    }
+
+    public void afficherTout(){
+        for(Map.Entry<TypeJauge, Gauge> paire : this.liste.entrySet()){
+            Gauge la_gauge = paire.getValue();
+            la_gauge.showGauge();
+        }
+    }
+
+    public boolean uneJaugeEstDepassee(){
+        boolean res = false;
+        for(Map.Entry<TypeJauge, Gauge> paire : this.liste.entrySet()){
+            Gauge la_gauge = paire.getValue();
+            res = res || la_gauge.estDepassee();
+        }
+        return res;
+    }
+}
