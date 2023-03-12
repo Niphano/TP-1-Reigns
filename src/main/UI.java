@@ -3,36 +3,70 @@ package main;
 import java.util.Map;
 import java.util.Scanner;
 
-public class InterfaceTexte {
+public class UI {
 
-    private static final Scanner fluxIn = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
-    public static String saisieTexteLibre(String question){
+    public static String askForString(String question){
         System.out.println(question);
-        System.out.flush();
-        return fluxIn.nextLine();
+        return scanner.nextLine();
     }
 
-    public static Object chercherDansReponses(String test,Map<String,Object> reponses){
-        for(Map.Entry<String,Object> paire : reponses.entrySet()){
-            if(test.equals(paire.getKey())){
-                return paire.getValue();
-            }
-        }
-        return null;
-    }
-
-    public static Object reponseQCM(String question, Map<String,Object> reponses,Object force){
-        boolean reponseValide = false;
-        Object res = null;
-        while(res == null){
+    public static int askForInt(String question){
+        int value = 0;
+        boolean validInput = false;
+        while(!validInput){
             System.out.println(question);
-            System.out.flush();
-            res = chercherDansReponses(fluxIn.nextLine(),reponses);
-            if(force != null && res == null) {
-                return force;
+            try{
+                value = Integer.parseInt(scanner.nextLine());
+                validInput = true;
+            } catch(NumberFormatException e){
+                System.out.println("Invalid input. Please enter an integer.");
             }
         }
-        return res;
+        return value;
     }
+
+    public static double askForDouble(String question){
+        double value = 0;
+        boolean validInput = false;
+        while(!validInput){
+            System.out.println(question);
+            try{
+                value = Double.parseDouble(scanner.nextLine());
+                validInput = true;
+            } catch(NumberFormatException e){
+                System.out.println("Invalid input. Please enter a number.");
+            }
+        }
+        return value;
+    }
+
+    public static boolean askForBoolean(String question){
+        System.out.println(question + " (y/n)");
+        String response = scanner.nextLine();
+        while(!response.equals("y") && !response.equals("n")){
+            System.out.println("Invalid input. Please enter 'y' or 'n'.");
+            response = scanner.nextLine();
+        }
+        return response.equals("y");
+    }
+
+    public static <T> T showQuestion(String question, Map<String,T> responses, T defaultValue){
+        while(true){
+            System.out.println(question);
+            for(String response : responses.keySet()){
+                System.out.println(response);
+            }
+            String userInput = scanner.nextLine();
+            if(responses.containsKey(userInput)){
+                return responses.get(userInput);
+            } else if(userInput.isEmpty() && defaultValue != null){
+                return defaultValue;
+            } else{
+                System.out.println("Invalid input. Please enter a valid option.");
+            }
+        }
+    }
+
 }

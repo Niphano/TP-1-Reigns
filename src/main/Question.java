@@ -1,7 +1,6 @@
 package main;
 
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * La classe Question représente une question avec ses effets sur les jauges d'un personnage
@@ -21,19 +20,14 @@ public class Question {
     /**
      * l'effet de la réponse de gauche
      */
-    protected String effetGauche;
-    /**
-     * l'effet de la réponse de droite
-     */
-    protected String effetDroite;
     /**
      * les effets sur les jauges pour la réponse de gauche
      */
-    protected Map<TypeJauge, Integer> effetJaugeGauche;
+    protected Effet effetGauche;
     /**
      * les effets sur les jauges pour la réponse de droite
      */
-    protected Map<TypeJauge, Integer> effetJaugeDroite;
+    protected Effet effetDroite;
 
     /**
      * Construit une nouvelle question avec les informations données
@@ -45,14 +39,12 @@ public class Question {
      */
     public Question(String nomPersonnage,
                     String question,
-                    String effetGauche,
-                    String effetDroite) {
+                    Effet effetGauche,
+                    Effet effetDroite) {
         this.nomPersonnage = nomPersonnage;
         this.question = question;
         this.effetGauche = effetGauche;
         this.effetDroite = effetDroite;
-        this.effetJaugeDroite = new TreeMap<>();
-        this.effetJaugeGauche = new TreeMap<>();
     }
 
     /**
@@ -61,12 +53,14 @@ public class Question {
     public void afficheQuestion() {
         String result = "["+nomPersonnage+"] "
                 + question
-                + "[G: "+effetGauche
-                + ",D: "+effetDroite
+                + "[" + effetGauche.getAlias() + " : "+effetGauche.getNom()
+                + "," + effetDroite.getAlias() + " : "+effetDroite.getNom()
                 + "]";
         System.out.println(result);
-        System.out.println("Effet G:"+afficheEffets(effetJaugeGauche));
-        System.out.println("Effet D:"+afficheEffets(effetJaugeDroite));
+        System.out.println("Effet "+ effetGauche.getAlias() +" : ");
+        effetGauche.afficher();
+        System.out.println("Effet " + effetDroite.getAlias() +" : ");
+        effetDroite.afficher();
         System.out.flush();
     }
 
@@ -76,6 +70,7 @@ public class Question {
      * @param effets La map des effets de jauge
      * @return la chaîne de caractères représentant les effets de la jauge
      */
+
     private String afficheEffets(Map<TypeJauge, Integer> effets) {
         StringBuilder result = new StringBuilder();
         for (Map.Entry<TypeJauge, Integer> effet : effets.entrySet()) {
@@ -91,52 +86,33 @@ public class Question {
     /**
      * Applique les effets associés au choix gauche sur un personnage donné.
      *
-     * @param AfficherJauge le personnage sur lequel les effets doivent être appliqués
+     * @param personnage le personnage sur lequel les effets doivent être appliqués
      */
-    public void appliqueEffetsGauche(AfficherJauge AfficherJauge){
-        this.appliqueEffets(effetJaugeGauche, AfficherJauge);
+    public void appliqueEffetsGauche(Character personnage){
+        this.effetGauche.appliquer();
     }
 
     /**
      * Applique les effets associés au choix droit sur un personnage donné.
      *
-     * @param AfficherJauge le personnage sur lequel les effets doivent être appliqués
+     * @param personnage le personnage sur lequel les effets doivent être appliqués
      */
-    public void appliqueEffetsDroite(AfficherJauge AfficherJauge){
-        this.appliqueEffets(effetJaugeDroite, AfficherJauge);
+    public void appliqueEffetsDroite(Character personnage){
+        this.effetDroite.appliquer();
     }
 
     /**
      * Applique les effets d'une jauge sur un personnage donné.
      *
      * @param effets les effets de jauge à appliquer
-     * @param AfficherJauge le personnage sur lequel les effets doivent être appliqués
+     * @param personnage le personnage sur lequel les effets doivent être appliqués
      */
     private void appliqueEffets(Map<TypeJauge,Integer> effets,
-                                AfficherJauge AfficherJauge){
+                                Character personnage){
         for(Map.Entry<TypeJauge,Integer> effet : effets.entrySet()){
-            switch(effet.getKey()){
-                case ARMEE:
-                    AfficherJauge.getJaugeArmee().setValeur(
-                            AfficherJauge.getJaugeArmee().getValeur()
-                                    +effet.getValue());
-                    break;
-                case CLERGE:
-                    AfficherJauge.getJaugeClerge().setValeur(
-                            AfficherJauge.getJaugeClerge().getValeur()
-                                    +effet.getValue());
-                    break;
-                case FINANCE:
-                    AfficherJauge.getJaugeFinance().setValeur(
-                            AfficherJauge.getJaugeFinance().getValeur()
-                                    +effet.getValue());
-                    break;
-                case PEUPLE:
-                    AfficherJauge.getJaugePeuple().setValeur(
-                            AfficherJauge.getJaugePeuple().getValeur()
-                                    +effet.getValue());
-                    break;
-            }
+
+            personnage.getGaugeByType(effet.getKey()).incrementerValeur(effet.getValue());
+
         }
     }
 
@@ -146,10 +122,11 @@ public class Question {
      * @param jauge la jauge à laquelle l'effet doit être ajouté
      * @param valeur la valeur de l'effet à ajouter
      */
+    /*
     public void ajouteEffetGauche(TypeJauge jauge,
                                   int valeur){
         effetJaugeGauche.put(jauge,valeur);
-    }
+    }*/
 
     /**
      * Ajoute un effet à la jauge associée au choix droit.
@@ -157,9 +134,84 @@ public class Question {
      * @param jauge la jauge à laquelle l'effet doit être ajouté
      * @param valeur la valeur de l'effet à ajouter
      */
+    /*
     public void ajouteEffetDroite(TypeJauge jauge,
                                   int valeur){
         effetJaugeDroite.put(jauge,valeur);
+    }
+    */
+
+
+    /**
+     * Retourne le nom du personnage associé à la question.
+     *
+     * @return le nom du personnage associé à la question
+     */
+    public String getNomPersonnage() {
+        return nomPersonnage;
+    }
+
+    /**
+     * Modifie le nom du personnage associé à la question.
+     *
+     * @param nomPersonnage le nouveau nom du personnage associé à la question
+     */
+    public void setNomPersonnage(String nomPersonnage) {
+        this.nomPersonnage = nomPersonnage;
+    }
+
+    /**
+     * Retourne la question.
+     *
+     * @return la question
+     */
+    public String getQuestion() {
+        return question;
+    }
+
+    /**
+     * Modifie la question.
+     *
+     * @param question la nouvelle question
+     */
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    /**
+     * Retourne l'effet gauche de la question.
+     *
+     * @return l'effet gauche de la question.
+     */
+    public Effet getEffetGauche() {
+        return effetGauche;
+    }
+
+    /**
+     * Modifie l'effet gauche de la question.
+     *
+     * @param effetGauche le nouvel effet gauche de la question
+     */
+    public void setEffetGauche(Effet effetGauche) {
+        this.effetGauche = effetGauche;
+    }
+
+    /**
+     * Retourne l'effet droit de la question.
+     *
+     * @return l'effet droit de la question.
+     */
+    public Effet getEffetDroite() {
+        return effetDroite;
+    }
+
+    /**
+     * Modifie l'effet droit de la question.
+     *
+     * @param effetDroite le nouvel effet droit de la question
+     */
+    public void setEffetDroite(Effet effetDroite) {
+        this.effetDroite = effetDroite;
     }
 
 }

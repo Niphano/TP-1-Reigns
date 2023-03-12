@@ -1,114 +1,88 @@
 package main;
 
 /**
- * Représente une jauge avec un nom, une valeur et un type.
- *
- * @author Julie Jacques / Lucien Mousin
- * @version 1.0
+ * Représente une jauge avec un nom, une valeur, un type et une valeur maximale.
  */
-public class Jauge {
-    /**
-     * Le type de la jauge
-     */
-    protected TypeJauge type;
-    /**
-     * Le nom de la jauge
-     */
-    protected String nom;
-    /**
-     * La valeur de la jauge
-     */
-    protected int valeur;
+public class Gauge {
+    private TypeJauge type;
+    private String nom;
+    private int value;
+    private int maxValue;
 
-    private static final int LONGUEUR_JAUGE = 50;
 
-    static public int valInitJauge(int borneInf,int borneSup){
-        return borneInf + (int)(Math.random() * (borneSup - borneInf));
-    }
-
-    /**
-     * Crée une nouvelle jauge avec le nom et la valeur spécifiés.
-     *
-     * @param nom Le nom de la jauge
-     * @param valeur La valeur de la jauge
-     */
-    public Jauge(String nom, int valeur){
+    public Gauge(String nom, int value, int maxValue, TypeJauge type) {
         this.nom = nom;
-        this.valeur = valeur;
+        this.value = value;
+        this.maxValue = maxValue;
+        this.type = type;
     }
 
-    /**
-     * Retourne le nom de la jauge.
-     *
-     * @return le nom de la jauge
-     */
     public String getNom() {
         return nom;
     }
-
-    /**
-     * Modifie le nom de la jauge.
-     *
-     * @param nom Le nouveau nom de la jauge
-     */
     public void setNom(String nom) {
         this.nom = nom;
     }
 
-    /**
-     * Retourne la valeur de la jauge.
-     *
-     * @return la valeur de la jauge
-     */
-    public int getValeur() {
-        return valeur;
+    public int getValue() {
+        return value;
     }
 
-    /**
-     * Modifie la valeur de la jauge.
-     *
-     * @param valeur La nouvelle valeur de la jauge
-     */
-    public void setValeur(int valeur) {
-        this.valeur = valeur;
+    public void setValue(int value) {
+        if (value >= 0 && value <= this.maxValue) {
+            this.value = value;
+        } else if (value < 0) {
+            this.value = 0;
+        } else {
+            this.value = this.maxValue;
+        }
     }
 
-    public void incrementeValeur(int delta) { this.valeur += delta; }
+    public void incrementerValeur(int delta) {
+        this.value += delta;
+        if (this.value < 0) {
+            this.value = 0;
+        } else if (this.value > this.maxValue) {
+            this.value = this.maxValue;
+        }
+    }
 
-    /**
-     * Retourne le type de la jauge.
-     *
-     * @return le type de la jauge
-     */
     public TypeJauge getType() {
         return type;
     }
 
-    /**
-     * Modifie le type de la jauge.
-     *
-     * @param type Le nouveau type de la jauge
-     */
+
     public void setType(TypeJauge type) {
         this.type = type;
     }
 
     public void showGauge() {
-        String result = "[";
-        for(int i=0;i<this.valeur;i++){
-            result += "|";
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i = 0; i < this.value; i++) {
+            sb.append("|");
         }
-        for(int i=0;i<LONGUEUR_JAUGE-(this.valeur);i++){
-            result += " ";
+        for (int i = 0; i < GAUGE_LENGTH - this.value; i++) {
+            sb.append(" ");
         }
-        result += "] ";
-        // affichage du nom
-        result += this.nom;
-        System.out.println(result);
+        sb.append("] ");
+        sb.append(this.nom);
+        System.out.println(sb.toString());
     }
 
-    public boolean estDepassee(){
-        return this.valeur <= 0 || this.valeur >= LONGUEUR_JAUGE;
+    public boolean estDepassee() {
+        return this.value <= 0 || this.value >= this.maxValue;
     }
 
+    public static int valInitJauge(int borneInf, int borneSup) {
+        return borneInf + (int) (Math.random() * (borneSup - borneInf));
+    }
+
+    public int getMaxValue() {
+        return this.maxValue;
+    }
+
+    public void setMaxValue(int maxValue) {
+        this.maxValue = maxValue;
+    }
 }

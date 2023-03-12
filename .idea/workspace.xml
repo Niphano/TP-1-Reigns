@@ -5,7 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6e158a1a-5df0-4baf-8107-6e571ac3dc1c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/AbstractEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/AlterationJauge.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/BDD.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Character.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Effet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Gauge.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/GaugesBank.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/UI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/AfficherJauge.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Jauge.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Personnage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Question.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Reigns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Reigns.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/TypeJauge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/TypeJauge.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +88,5 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

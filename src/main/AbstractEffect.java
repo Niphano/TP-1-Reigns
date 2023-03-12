@@ -1,6 +1,6 @@
 package main;
 
-abstract public class StrategiesEffect {
+abstract public class AbstractEffect {
 
 
     abstract void strategiesEffect();

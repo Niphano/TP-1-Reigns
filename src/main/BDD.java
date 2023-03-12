@@ -1,10 +1,9 @@
 package main;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class BanqueQuestion {
+public class BDD {
     private static ArrayList<Question> liste;
 
     /*
@@ -101,7 +100,7 @@ public class BanqueQuestion {
 
     }
 
-    public BanqueQuestion() {
+    public BDD() {
         liste = new ArrayList<>();
         initListe();
     }
