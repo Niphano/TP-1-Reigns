@@ -44,7 +44,7 @@ public class Reigns {
         initPersonnage();
 
         AfficherJauge = new AfficherJauge();
-        
+
         System.out.println(personnage.getGenre().longRegne()
                 +" "+personnage.getNom());
 
